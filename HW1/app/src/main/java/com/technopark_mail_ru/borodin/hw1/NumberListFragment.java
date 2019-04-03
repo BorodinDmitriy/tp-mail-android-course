@@ -20,6 +20,7 @@ import java.util.List;
 
 public class NumberListFragment extends Fragment {
     private Integer numberOfValues = 100;
+    private GridListener listener;
 
     void fillList(List<String> listToFill) {
         for (int i = 0; i < numberOfValues; i++) {
@@ -67,6 +68,7 @@ public class NumberListFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        this.listener = (GridListener)context;
     }
 
     class NumbersListRecyclerViewHolder extends RecyclerView.ViewHolder {
@@ -97,7 +99,7 @@ public class NumberListFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull NumbersListRecyclerViewHolder numbersListRecyclerViewHolder, int i) {
+        public void onBindViewHolder(@NonNull NumbersListRecyclerViewHolder numbersListRecyclerViewHolder, final int i) {
             String str = mNumbersStrings.get(i);
             numbersListRecyclerViewHolder.mTextView.setText(str);
 
@@ -105,6 +107,17 @@ public class NumberListFragment extends Fragment {
                 numbersListRecyclerViewHolder.mTextView.setTextColor(Color.RED);
             else
                 numbersListRecyclerViewHolder.mTextView.setTextColor(Color.BLUE);
+
+            int currentColor = numbersListRecyclerViewHolder.mTextView.getCurrentTextColor();
+            final String numberColor = String.format("#%06X", (0xFFFFFF & currentColor));
+            numbersListRecyclerViewHolder.mTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener != null){
+                        listener.itemClicked(i,numberColor);
+                    }
+                }
+            });
         }
 
         @Override
