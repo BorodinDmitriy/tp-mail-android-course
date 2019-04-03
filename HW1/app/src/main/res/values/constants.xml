@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="portrait_orientation_grid_columns_size">3</integer>
+    <integer name="landscape_orientation_grid_columns_size">4</integer>
+    <integer name="default_number_of_values">100</integer>
+</resources>

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NumberListFragment extends Fragment {
-    private Integer numberOfValues = 100;
+    private Integer numberOfValues = R.integer.default_number_of_values;
     private GridListener listener;
 
     void fillList(List<String> listToFill) {
@@ -47,7 +47,7 @@ public class NumberListFragment extends Fragment {
 
 
         RecyclerView recyclerView = view.findViewById(R.id.numbers_list);
-        final GridLayoutManager layout = new GridLayoutManager(getActivity(), 3);
+        final GridLayoutManager layout = new GridLayoutManager(getActivity(), R.integer.portrait_orientation_grid_columns_size);
         recyclerView.setLayoutManager(layout);
         final NumbersListRecyclerViewAdapter myAdapter = new NumbersListRecyclerViewAdapter(numbersStrings);
         recyclerView.setAdapter(myAdapter);
@@ -62,9 +62,9 @@ public class NumberListFragment extends Fragment {
             }
         });
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
-            layout.setSpanCount(3);
+            layout.setSpanCount(R.integer.portrait_orientation_grid_columns_size);
         else
-            layout.setSpanCount(4);
+            layout.setSpanCount(R.integer.landscape_orientation_grid_columns_size);
 
 
         return view;
