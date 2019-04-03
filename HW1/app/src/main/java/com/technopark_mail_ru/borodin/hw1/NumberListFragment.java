@@ -36,6 +36,11 @@ public class NumberListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        if (savedInstanceState != null) {
+            numberOfValues = savedInstanceState.getInt("numberOfValues");
+        }
+
         View view = inflater.inflate(R.layout.number_list_fragment, container, false);
         final ArrayList<String> numbersStrings = new ArrayList<>();
         fillList(numbersStrings);
@@ -69,6 +74,11 @@ public class NumberListFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         this.listener = (GridListener)context;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putInt("numberOfValues", numberOfValues);
     }
 
     class NumbersListRecyclerViewHolder extends RecyclerView.ViewHolder {

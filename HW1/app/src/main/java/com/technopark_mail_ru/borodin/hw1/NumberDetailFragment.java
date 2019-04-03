@@ -38,6 +38,10 @@ public class NumberDetailFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            number = savedInstanceState.getInt("number");
+            numberColor = savedInstanceState.getInt("numberColor");
+        }
 
         return inflater.inflate(R.layout.number_detail_fragment, container, false);
     }
@@ -51,5 +55,11 @@ public class NumberDetailFragment extends Fragment {
             text.setText(valueOf(number));
             text.setTextColor(numberColor);
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putInt("number", number);
+        outState.putInt("numberColor", numberColor);
     }
 }
