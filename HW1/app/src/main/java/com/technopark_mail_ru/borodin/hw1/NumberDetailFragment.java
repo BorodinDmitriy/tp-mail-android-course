@@ -62,4 +62,6 @@ public class NumberDetailFragment extends Fragment {
         outState.putInt("number", number);
         outState.putInt("numberColor", numberColor);
     }
+
+    
 }
