@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NumberListFragment extends Fragment {
-    private Integer numberOfValues = R.integer.default_number_of_values;
+    private Integer numberOfValues;
     private GridListener listener;
 
     void fillList(List<String> listToFill) {
@@ -39,7 +39,11 @@ public class NumberListFragment extends Fragment {
 
         if (savedInstanceState != null) {
             numberOfValues = savedInstanceState.getInt("numberOfValues");
+        } else {
+            numberOfValues = getContext().getResources().getInteger(R.integer.default_number_of_values);
         }
+
+        Integer defaultGridColumnCount = getContext().getResources().getInteger(R.integer.portrait_orientation_grid_columns_size);
 
         View view = inflater.inflate(R.layout.number_list_fragment, container, false);
         final ArrayList<String> numbersStrings = new ArrayList<>();
@@ -47,7 +51,7 @@ public class NumberListFragment extends Fragment {
 
 
         RecyclerView recyclerView = view.findViewById(R.id.numbers_list);
-        final GridLayoutManager layout = new GridLayoutManager(getActivity(), R.integer.portrait_orientation_grid_columns_size);
+        final GridLayoutManager layout = new GridLayoutManager(getActivity(), defaultGridColumnCount);
         recyclerView.setLayoutManager(layout);
         final NumbersListRecyclerViewAdapter myAdapter = new NumbersListRecyclerViewAdapter(numbersStrings);
         recyclerView.setAdapter(myAdapter);
@@ -62,9 +66,9 @@ public class NumberListFragment extends Fragment {
             }
         });
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
-            layout.setSpanCount(R.integer.portrait_orientation_grid_columns_size);
+            layout.setSpanCount(defaultGridColumnCount);
         else
-            layout.setSpanCount(R.integer.landscape_orientation_grid_columns_size);
+            layout.setSpanCount(getContext().getResources().getInteger(R.integer.landscape_orientation_grid_columns_size));
 
 
         return view;
