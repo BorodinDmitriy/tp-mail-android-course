@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="#252525">
+    android:background="@color/backgroundWhiteColor">
 
     <TextView
         android:id="@+id/number_detail_text"
