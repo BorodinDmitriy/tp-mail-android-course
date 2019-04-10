@@ -133,7 +133,8 @@ public class NumberListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull NumbersListRecyclerViewHolder numbersListRecyclerViewHolder, final int i) {
-            String str = mNumbersStrings.get(i);
+            final int currentPosition = numbersListRecyclerViewHolder.getAdapterPosition();
+            String str = mNumbersStrings.get(currentPosition);
             numbersListRecyclerViewHolder.mTextView.setText(str);
 
             if (i % 2 == 0)
@@ -147,7 +148,7 @@ public class NumberListFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     if(listener != null){
-                        listener.itemClicked(i,numberColor);
+                        listener.itemClicked(currentPosition,numberColor);
                     }
                 }
             });
